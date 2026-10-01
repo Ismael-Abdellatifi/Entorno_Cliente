@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//En" "http://w3.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Ejercicio 15 - Base Inicial</title>
+    <style type="text/css">
+
+        body {
+            font-family: arial, helvetica;
+        }
+
+        #info {
+            width: 160px;
+            border: thin solid silver;
+            padding: .5em;
+            position: fixed;
+            background-color: #fcfcfc;
+        }
+
+        #info h1 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+    </style>
+    <script type="text/javascript">
+
+        // TU CÓDIGO JAVASCRIPT DEBE IR AQUÍ
+        // Pista: Debes asignar las funciones controladoras a document o window
+        // ejemplo: document.onmousemove = tuFuncion;
+
+
+        function muestraInformacion(mensaje) {
+            // Localizamos el cuadro por su id
+            var info = document.getElementById("info");
+
+            // Borramos lo que hay y escribimos el título (primer elemento del array)
+            info.innerHTML = "<h1>" + mensaje[0] + "</h1>";
+
+            // Recorremos el resto del array (desde el 1) añadiendo un párrafo por línea.
+            // Se usa += para añadir sin borrar lo que ya hay
+            for (var i = 1; i < mensaje.length; i++) {
+                info.innerHTML += "<p>" + mensaje[i] + "</p>";
+            }
+        }
+
+        // Controlador del evento del ratón (se ejecuta cada vez que se mueve).
+        // Recibe el objeto evento con toda la información del movimiento.
+        function controlaRaton(evento) {
+            // Compatibilidad: navegadores antiguos (IE) no pasan el evento
+            // como parámetro, sino que lo guardan en window.event
+            var e = evento || window.event;
+
+            // clientX/clientY: posición respecto a la ventana visible del navegador
+            // pageX/pageY: posición respecto a la página completa (incluye el scroll)
+            muestraInformacion([
+                "Ratón",
+                "Navegador [" + e.clientX + ", " + e.clientY + "]",
+                "Pagina [" + e.pageX + ", " + e.pageY + "]"
+            ]);
+        }
+
+        // Controlador del evento del teclado (se ejecuta al pulsar una tecla)
+        function controlaTeclado(evento) {
+            // Misma compatibilidad que en la función del ratón
+            var e = evento || window.event;
+
+            // charCode es el código del carácter en navegadores modernos;
+            // keyCode es el equivalente en los antiguos. Con || usamos el que exista
+            var codigo = e.charCode || e.keyCode;
+
+            // String.fromCharCode convierte el código numérico en su carácter
+            // (por ejemplo, 97 -> "a")
+            muestraInformacion([
+                "Teclado",
+                "Carácter [" + String.fromCharCode(codigo) + "]",
+                "Código [" + codigo + "]"
+            ]);
+        }
+
+        // Asignamos los controladores.
+        //pasamos la función pero no la ejecutamos.
+        // Cada movimiento del ratón llama a controlaRaton.
+        document.onmousemove = controlaRaton;
+        // y las teclas pulsadas llama a controlaTeclado
+        document.onkeypress = controlaTeclado;
+
+    </script>
+</head>
+<body>
+
+<div id="info">
+    <h1>Información</h1>
+    <p>Mueve el ratón o pulsa una tecla para ver los detalles del evento.</p>
+</div>
+
+<!-- Div vacío de 1000px de alto: crea espacio para poder hacer scroll
+     y comprobar que pageY crece mientras clientY no -->
+<div style="height: 1000px;"></div> <!-- Espacio para poder hacer scroll y probar pageX/pageY -->
+</body>
+</html>
