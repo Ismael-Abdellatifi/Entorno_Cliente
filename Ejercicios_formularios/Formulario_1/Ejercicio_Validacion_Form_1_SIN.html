@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Validar Formularios</title>
+
+    <style type="text/css">
+        span {
+            color: red;
+        }
+    </style>
+
+    <script src="Utilidades.js"></script>
+
+    <script>
+
+        window.onload = function() {
+
+            document.getElementById("formulario_1").onsubmit = function(evento) {
+
+                let correcto = true;
+
+
+                // VALIDAR NOMBRE
+                let nombre = document.getElementById("nombre");
+
+                let errorNombre = validarNombre(nombre);
+
+                document.getElementById("info_nombre").innerHTML = errorNombre;
+
+                if (errorNombre !== "") {
+                    correcto = false;
+                }
+
+
+                // VALIDAR APELLIDOS
+                let apellidos = document.getElementById("apellidos");
+
+                let errorApellidos = validarApellidos(apellidos);
+
+                document.getElementById("info_apellidos").innerHTML = errorApellidos;
+
+                if (errorApellidos !== "") {
+                    correcto = false;
+                }
+
+
+                // VALIDAR NIF
+                let dni = document.getElementById("dni");
+
+                let errorDni = validarNIF(dni);
+
+                document.getElementById("info_dni").innerHTML = errorDni;
+
+                if (errorDni !== "") {
+                    correcto = false;
+                }
+
+
+                // VALIDAR SEXO
+                let sexo = document.getElementById("sexo");
+
+                let errorSexo = validarSexo(sexo);
+
+                document.getElementById("info_sexo").innerHTML = errorSexo;
+
+                if (errorSexo !== "") {
+                    correcto = false;
+                }
+
+
+                // VALIDAR FECHA
+                let dia = document.getElementById("f_dia");
+                let mes = document.getElementById("f_mes");
+                let ano = document.getElementById("f_ano");
+
+                let errorFecha = validarFecha(dia, mes, ano);
+
+                document.getElementById("info_fecha").innerHTML = errorFecha;
+
+                if (errorFecha !== "") {
+                    correcto = false;
+                }
+
+
+                // VALIDAR SUGERENCIA
+                let sugerencia = document.getElementById("sugerencia");
+
+                let errorSugerencia = validarSugerencia(sugerencia);
+
+                document.getElementById("info_sugerencia").innerHTML = errorSugerencia;
+
+                if (errorSugerencia !== "") {
+                    correcto = false;
+                }
+
+
+                // SI HAY ALGÚN ERROR, NO SE ENVÍA EL FORMULARIO
+                if (!correcto) {
+                    evento.preventDefault();
+                }
+
+            };
+
+        };
+
+    </script>
+</head>
+
+
+<body>
+
+    <h1>Ejercicio Validación de Formularios</h1>
+
+    <form id="formulario_1">
+
+        <p>
+
+            <h3>Formulario de Registro:</h3>
+
+
+            <!-- NOMBRE -->
+
+            <label for="nombre">Nombre: </label>
+
+            <input
+                type="text"
+                name="nombre"
+                id="nombre"
+                maxlength="25"
+                size="15"
+            />
+
+            <span id="info_nombre"></span>
+
+            <div>(Mínimo 2 letras)</div>
+
+            <br><br>
+
+
+            <!-- APELLIDOS -->
+
+            <label for="apellidos">Apellidos: </label>
+
+            <input
+                type="text"
+                name="apellidos"
+                id="apellidos"
+                maxlength="50"
+                size="25"
+            />
+
+            <span id="info_apellidos"></span>
+
+            <div>(Mínimo 4 letras)</div>
+
+            <br><br>
+
+
+            <!-- NIF -->
+
+            <label for="dni">NIF: </label>
+
+            <input
+                type="text"
+                name="dni"
+                id="dni"
+                maxlength="9"
+                size="9"
+            />
+
+            <span id="info_dni"></span>
+
+            <br><br><br>
+
+
+            <!-- SEXO -->
+
+            <label>Sexo: </label>
+
+            <select id="sexo">
+
+                <option value="">Selecciona una opción</option>
+
+                <option value="F">Femenino</option>
+
+                <option value="M">Masculino</option>
+
+                <option value="Y">Ya quisiera yo</option>
+
+            </select>
+
+            <span id="info_sexo"></span>
+
+            <br><br><br>
+
+
+            <!-- FECHA -->
+
+            <label for="f_dia">Fecha: </label>
+
+            <input
+                type="text"
+                id="f_dia"
+                maxlength="2"
+                size="1"
+            />
+
+            /
+
+            <input
+                type="text"
+                id="f_mes"
+                maxlength="2"
+                size="1"
+            />
+
+            /
+
+            <input
+                type="text"
+                id="f_ano"
+                maxlength="4"
+                size="3"
+            />
+
+            (dd/mm/aaaa)
+
+            <span id="info_fecha"></span>
+
+            <br><br><br>
+
+
+            <!-- SUGERENCIA -->
+
+            <label for="sugerencia">Alguna sugerencia: </label>
+
+            <textarea
+                id="sugerencia"
+                name="sugerencia"
+            ></textarea>
+
+            <span id="info_sugerencia"></span>
+
+            <br><br>
+
+        </p>
+
+
+        <p>
+            <b>Todos los campos son obligatorios.</b>
+        </p>
+
+        <br>
+
+        <p>
+
+            <input type="submit" value="ENVIAR">
+
+            <br><br>
+
+            <input type="reset" value="Limpiar">
+
+        </p>
+
+    </form>
+
+</body>
+</html>
+
