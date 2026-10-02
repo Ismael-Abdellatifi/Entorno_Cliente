@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8"/>
+    <title>Validar Formularios</title>
+
+    <style type="text/css">
+        span {
+            color: red;
+        }
+    </style>
+
+    <script src="Utilidades.js"></script>
+
+    <script>
+
+        function validarFormulario() {
+
+            let correcto = true;
+
+            let nombre = document.getElementById("nombre");
+            let dni = document.getElementById("dni");
+            let sexo = document.getElementById("sexo");
+            let sugerencia = document.getElementById("sugerencia");
+
+            let infoNombre = document.getElementById("info_nombre");
+            let infoDni = document.getElementById("info_dni");
+            let infoSexo = document.getElementById("info_sexo");
+            let infoSugerencia = document.getElementById("info_sugerencia");
+
+
+            // Validar nombre
+            let error = validarNombre(nombre);
+
+            if (error !== "") {
+                infoNombre.textContent = error;
+                correcto = false;
+            } else {
+                infoNombre.textContent = "";
+            }
+
+
+            // Validar NIF
+            error = validarNIF(dni);
+
+            if (error !== "") {
+                infoDni.textContent = error;
+                correcto = false;
+            } else {
+                infoDni.textContent = "";
+            }
+
+
+            // Validar sexo
+            error = validarSexo(sexo);
+
+            if (error !== "") {
+                infoSexo.textContent = error;
+                correcto = false;
+            } else {
+                infoSexo.textContent = "";
+            }
+
+
+            // Validar sugerencia
+            error = validarSugerencia(sugerencia);
+
+            if (error !== "") {
+                infoSugerencia.textContent = error;
+                correcto = false;
+            } else {
+                infoSugerencia.textContent = "";
+            }
+
+
+            return correcto;
+        }
+
+
+        function limpiarErrores() {
+
+            document.getElementById("info_nombre").textContent = "";
+            document.getElementById("info_dni").textContent = "";
+            document.getElementById("info_sexo").textContent = "";
+            document.getElementById("info_sugerencia").textContent = "";
+        }
+
+
+        window.onload = function () {
+
+            document.getElementById("nombre").focus();
+
+            document.getElementById("formulario_1").onsubmit = function () {
+                return validarFormulario();
+            };
+
+            document.getElementById("formulario_1").onreset = function () {
+                limpiarErrores();
+            };
+
+        };
+
+    </script>
+
+</head>
+
+
+<body>
+
+    <h1>Ejercicio Validación de Formularios</h1>
+
+    <form id="formulario_1">
+
+        <p>
+
+            <h3>Formulario de Registro:</h3>
+
+            <label for="nombre">Nombre: </label>
+            <input type="text" name="nombre" id="nombre" maxlength="25" size="15"/>
+            <span id="info_nombre"></span>
+
+            <div>(Mínimo 2 letras)</div>
+
+            <br><br>
+
+
+            <label for="dni">NIF: </label>
+            <input type="text" name="dni" id="dni" maxlength="9" size="9"/>
+            <span id="info_dni"></span>
+
+            <br><br><br>
+
+
+            <label for="sexo">Sexo: </label>
+
+            <select id="sexo">
+                <option value="">Selecciona una opción</option>
+                <option value="F">Femenino</option>
+                <option value="M">Masculino</option>
+                <option value="Y">Ya quisiera yo</option>
+            </select>
+
+            <span id="info_sexo"></span>
+
+            <br><br><br>
+
+
+            <label for="sugerencia">Alguna sugerencia: </label>
+
+            <textarea id="sugerencia" name="sugerencia"></textarea>
+
+            <span id="info_sugerencia"></span>
+
+            <br><br>
+
+        </p>
+
+
+        <p>
+            <b>Todos los campos son obligatorios.</b>
+        </p>
+
+        <br>
+
+
+        <p>
+
+            <input type="submit" value="ENVIAR">
+
+            <br><br>
+
+            <input type="reset" value="Limpiar">
+
+        </p>
+
+    </form>
+
+</body>
+
+</html>
+
