@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://w3.org">
+<html xmlns="http://w3.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Ejercicio 14 - Base Inicial</title>
+    <style type="text/css">
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 20px;
+        }
+
+        p {
+            margin-top: 0;
+        }
+
+        .seccion {
+            border: 1px solid #ccc;
+            background-color: #fafafa;
+            padding: 15px;
+            margin-bottom: 20px;
+            width: 500px;
+        }
+    </style>
+    <script type="text/javascript">
+        // TU CÓDIGO JAVASCRIPT DEBE IR AQUÍ
+
+        window.onload = function() {
+            // Asignamos la misma función controladora (muestraOculta)
+            // al evento "click" de cada uno de los 3 enlaces.
+            document.getElementById('enlace_1').onclick = muestraOculta;
+            document.getElementById('enlace_2').onclick = muestraOculta;
+            document.getElementById('enlace_3').onclick = muestraOculta;
+        }
+
+
+        function muestraOculta() {
+            // previousElementSibling devuelve el elemento hermano anterior
+            // en el HTML., así sabemos qué bloque hay que mostrar u ocultar sin
+            // necesidad de usar un id distinto para cada caso.
+            var contenidos = this.previousElementSibling;
+
+            // Comprobamos si el contenido está oculto actualmente
+            if (contenidos.style.display === 'none') {
+                // Estaba oculto, lo mostramos y cambiamos el texto del enlace
+                contenidos.style.display = 'block';
+                this.innerHTML = 'Ocultar contenidos';
+            } else {
+                // Estaba visible, lo ocultamos y cambiamos el texto del enlace
+                contenidos.style.display = 'none';
+                this.innerHTML = 'Mostrar contenidos';
+            }
+
+            return false;
+        }
+
+    </script>
+</head>
+<body>
+
+<!-- En este caso cuando vayamos a cada enlace para ocultar o mostrar se hara correctamente en cada enlace correspondiente-->
+<div class="seccion">
+    <div id="contenidos_1">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed mattis enim vitae orci. Phasellus libero. Maecenas nisl arcu, consequat congue, commodo ac, consequat vitae, turpis. Aliquam elit. Mauris egestas pede sit amet lectus.
+    </div>
+    <!-- Enlace con id único para poder asignarle el evento desde JavaScript -->
+    <a id="enlace_1" href="#">Ocultar contenidos</a>
+</div>
+
+
+<div class="seccion">
+    <div id="contenidos_2">
+        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus. Ut varius tincidunt libero. Phasellus dolor. Maecenas vestibulum mollis diam. Pellentesque ut neque.
+    </div>
+    <a id="enlace_2" href="#">Ocultar contenidos</a>
+</div>
+
+
+<div class="seccion">
+    <div id="contenidos_3">
+        Aliquam non ac, feugiat in, ante. In id eros. Suspendisse ipsum. Proin tristique luctus tellus. Sed porttitor magna vitae nunc. Proin scelerisque sem non mollis laoreet.
+    </div>
+    <a id="enlace_3" href="#">Ocultar contenidos</a>
+</div>
+
+</body>
+</html>
